@@ -6,7 +6,7 @@ const Projects = () => {
   return (
     <>
       <Header/>
-      <div className='container-fluid' style={{paddingTop:'50px'}}>
+      <div className='container-fluid' style={{paddingTop:'100px'}}>
         <div className='d-flex justify-content-between align-items-center'>
           <h1>All Projects</h1>
           <input type="text" className="form-control w-25" placeholder="Search projects by their languages" />
