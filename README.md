@@ -7,3 +7,8 @@ Steps to build MERN project
 5.Setup routing for different pages
 6.Create components folder for different components of react app and inside we create component files
 7.Style the components using CSS
+8.Setup API calls for react app
+    - install axios library
+    - Create a service folder in src folder: allAPI.js, commonAPI.js and serverURL.js
+
+    
