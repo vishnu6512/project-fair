@@ -10,3 +10,18 @@ export const registerAPI= async (reqBody)=>{
 export const loginAPI= async (reqBody)=>{
     return await commonAPI("POST",`${serverURL}/login`,reqBody)
 }
+
+//AddProject API call by Add component when user clicked on add project button
+export const addProjectAPI= async (reqBody, reqHeader)=>{
+    return await commonAPI("POST",`${serverURL}/add-project`,reqBody, reqHeader)
+}
+
+//getHomeProject API call by Home component when page loaded in browser (useEffect())
+export const getHomeProjectAPI= async ()=>{
+    return await commonAPI("GET",`${serverURL}/home-project`,[])
+}
+
+//allProject API call by Project component when page loaded in browser (useEffect())
+export const allProjectAPI= async (searchKey,reqHeader)=>{
+    return await commonAPI("GET",`${serverURL}/all-project?search=${searchKey}`,[],reqHeader)
+}

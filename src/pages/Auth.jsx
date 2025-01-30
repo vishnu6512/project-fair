@@ -3,8 +3,10 @@ import register from '../assets/register.png'
 import {Form,FloatingLabel,Button} from 'react-bootstrap'
 import {Link, useNavigate} from 'react-router-dom'
 import { registerAPI, loginAPI } from '../services/allAPI'
+import Spinner from 'react-bootstrap/Spinner';
 
 const Auth = ({insideRegister}) => {
+  const [isLogin,setIsLogin]= useState(false)
 
   const navigate = useNavigate()
 
@@ -50,8 +52,13 @@ const Auth = ({insideRegister}) => {
         if(result.status==200){
           sessionStorage.setItem("user",JSON.stringify(result.data.user))
           sessionStorage.setItem("token",result.data.token)
-          setInputData({username:"",email:"",password:""})
+          setIsLogin(true)
+          setTimeout(()=>{
+            setInputData({username:"",email:"",password:""})
           navigate('/')
+          setIsLogin(false)
+          },2000)
+          
 
         } else {
           if(result.response.status==404){
@@ -103,8 +110,9 @@ const Auth = ({insideRegister}) => {
                   </div>
                   :
                   <div className='d-grid gap-2'>
-                    <Button onClick={handleLogin} variant='primary' type='submit'>
+                    <Button onClick={handleLogin} className=' btn btn-primary d-flex' variant='primary' type='submit'>
                       Login
+                      {isLogin &&       <Spinner animation="border" variant="light" />}
                     </Button>
                     <p>New user? Please click here to <Link to='/register'>Register</Link></p>
                   </div>
