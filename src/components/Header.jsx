@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Navbar, Container } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { tokenAuthContext } from '../contexts/AuthContextAPI'
 const Header = (insideDashBoard) => {
+  const navigate = useNavigate()
+  const {isAuthorised, setIsAuthorised}= useContext(tokenAuthContext)
+  const logout = ()=>{
+    sessionStorage.clear()
+    setIsAuthorised(false)
+    navigate('/')
+  }
   return (
     <>
       <Navbar className="bg-body-tertiary border-rounded position-fixed w-100" style={{ zIndex: '1' }}>
@@ -10,7 +18,7 @@ const Header = (insideDashBoard) => {
           {
             insideDashBoard &&
             <div className='ms-auto'>
-              <button className='btn btn-link text-dark'>Logout <i class="fa-solid fa-right-from-bracket"></i></button>
+              <button onClick={logout} className='btn btn-link text-dark'>Logout <i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
 
           }

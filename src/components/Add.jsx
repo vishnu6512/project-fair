@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Modal, Button} from 'react-bootstrap'
 import upload from '../assets/uploadimg.png'
 import { addProjectAPI } from '../services/allAPI'
+import { addProjectResponseContext } from '../contexts/Contextapis'
 
 const Add = () => {
+  const {addProjectResponse, setAddProjectResponse} = useContext(addProjectResponseContext)
   const [preview,setPreview]=useState("")
   const [projectDetails,setProjectDetails] = useState({
     title:"", languages:"", overview:"", github:"", website:"", projectImg:""
@@ -58,11 +60,13 @@ const Add = () => {
           const result = await addProjectAPI(reqBody,reqHeader)
           if(result.status==200){
             alert("Projected added successfully")
+            setAddProjectResponse(result)
             handleClose()
           } else{
             alert(result.response.data)
           }
         } catch(err){
+          console.log(err);
           
         }
         

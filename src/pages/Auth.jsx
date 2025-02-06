@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import register from '../assets/register.png'
 import {Form,FloatingLabel,Button} from 'react-bootstrap'
 import {Link, useNavigate} from 'react-router-dom'
 import { registerAPI, loginAPI } from '../services/allAPI'
 import Spinner from 'react-bootstrap/Spinner';
+import { tokenAuthContext } from '../contexts/AuthContextAPI'
 
 const Auth = ({insideRegister}) => {
   const [isLogin,setIsLogin]= useState(false)
+  const {isAuthorised, setIsAuthorised}= useContext(tokenAuthContext)
 
   const navigate = useNavigate()
 
@@ -52,9 +54,10 @@ const Auth = ({insideRegister}) => {
         if(result.status==200){
           sessionStorage.setItem("user",JSON.stringify(result.data.user))
           sessionStorage.setItem("token",result.data.token)
+          setIsAuthorised(true)
           setIsLogin(true)
           setTimeout(()=>{
-            setInputData({username:"",email:"",password:""})
+          setInputData({username:"",email:"",password:""})
           navigate('/')
           setIsLogin(false)
           },2000)

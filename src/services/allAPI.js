@@ -23,5 +23,25 @@ export const getHomeProjectAPI= async ()=>{
 
 //allProject API call by Project component when page loaded in browser (useEffect())
 export const allProjectAPI= async (searchKey,reqHeader)=>{
-    return await commonAPI("GET",`${serverURL}/all-project?search=${searchKey}`,[],reqHeader)
+    return await commonAPI("GET",`${serverURL}/all-project?search=${searchKey}`,{},reqHeader)
+}
+
+//userProject API call by View component when page loaded in browser (useEffect())
+export const userProjectAPI= async (reqHeader)=>{
+    return await commonAPI("GET",`${serverURL}/user-project`,{},reqHeader)
+}
+
+//updateProject API call by Edir component when user clicked on edit button 
+export const updateProjectAPI= async (id,reqBody,reqHeader)=>{
+    return await commonAPI("PUT",`${serverURL}/projects/${id}/edit`,reqBody,reqHeader)
+}
+
+//removeProject API call by View component when user clicked on delete button 
+export const userProjectRemoveAPI= async (id, reqHeader)=>{
+    return await commonAPI("DELETE",`${serverURL}/projects/${id}/remove`,{},reqHeader)
+}
+
+//updateUser API call by Profile component when user clicked on update button button 
+export const updateUserAPI= async (reqBody, reqHeader)=>{
+    return await commonAPI("PUT",`${serverURL}/edit-user`,reqBody,reqHeader)
 }
