@@ -1,4 +1,4 @@
-const serverURL = 'http://localhost:3000'
+const serverURL = 'https://pfserver-vyyq.onrender.com'
 
 
 export default serverURL
